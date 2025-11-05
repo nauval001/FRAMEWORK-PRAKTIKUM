@@ -1,0 +1,341 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Navigasi */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 15px 0;
+}
+nav a {
+  text-decoration: none;
+  padding: 5px 10px;
+}
+.nav-atas {
+  background-color: rgb(0, 97, 119);
+  color: white;
+}
+.nav-atas a {
+  color: white;
+}
+.nav-bawah {
+  background-color: rgb(255, 204, 0);
+  color: black;
+}
+.nav-bawah a {
+  color: black;
+}
+
+/* Banner */
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+.banner img {
+  width: 50%;
+  height: auto;
+  cursor: pointer;
+}
+
+/* Struktur */
+.struktur {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+}
+.struktur img {
+  max-width: 90%;
+  height: auto;
+  border: 1px solid #ccc;
+}
+
+/* Dua Kolom */
+.dua-kolom {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+.dua-kolom iframe {
+  max-width: 100%;
+  border-radius: 8px;
+}
+.dua-kolom .teks {
+  max-width: 400px;
+}
+
+/* Berita */
+.berita {
+  padding: 20px;
+}
+.berita h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.berita-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.berita-item {
+  width: 350px;
+  min-height: 420px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+.berita-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.berita-item-content {
+  padding: 15px;
+  flex-grow: 1;
+  text-align: justify;
+}
+.berita-item-content p {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+.berita-item-content p.judul {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.4;
+  color: black;
+}
+.berita-item-content span {
+  font-size: 14px;
+  color: gray;
+}
+
+/* Footer */
+footer {
+  background-color: rgb(2, 134, 164);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+footer h3 {
+  margin: 0 0 10px;
+}
+
+/* Wrapper umum */
+.role-wrapper, .user-wrapper, .ton-button, .login-card {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 32px 28px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.ton-button, .login-card { max-width: 500px; }
+.role-wrapper h2, .user-wrapper h2, .ton-button h2, .login-card h2 {
+  color: rgb(0, 208, 255);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* Table */
+.role-table, .user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.role-table th, .role-table td, .user-table th, .user-table td {
+  border: 1px solid #ddd;
+  padding: 10px 8px;
+  text-align: left;
+}
+.role-table th, .user-table th {
+  background: rgb(0, 208, 255);
+  color: #fff;
+  font-weight: bold;
+}
+.role-table tr:nth-child(even), .user-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Button & Link */
+.aksi-link, .button-dua, .tambah-user-btn {
+  display: inline-block;
+  margin: 2px 0 18px 0;
+  padding: 10px 22px;
+  background: orange;
+  color: #222;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.aksi-link {
+  padding: 6px 14px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+.aksi-linkdua {
+  display: inline-block;
+  margin: 2px 0;
+  padding: 6px 14px;
+  background: red;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.aksi-link:hover, .button-dua:hover, .tambah-user-btn:hover {
+  background: rgb(0, 208, 255);
+  color: #fff;
+}
+.aksi-linkdua:hover {
+  background: orange;
+  color: #fff;
+}
+
+/* Login */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f3f3f3;
+}
+.login-card input[type="email"],
+.login-card input[type="password"] {
+  width: 100%;
+  padding: 8px 10px;
+  margin: 6px 0 16px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+}
+.login-card label {
+  font-weight: bold;
+  color: #333;
+}
+.login-card button {
+  width: 100%;
+  background: orange;
+  color: #222;
+  border: none;
+  padding: 10px 0;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background 0.2s;
+}
+.login-card button:hover {
+  background: rgb(0, 208, 255);
+  color: #fff;
+}
+.login-card .error {
+  color: red;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.login-card .register-link {
+  text-align: center;
+  margin-top: 10px;
+}
+.login-card .register-link a {
+  color: orange;
+  text-decoration: none;
+  font-weight: bold;
+}
+.login-card .register-link a:hover {
+  color: rgb(0, 208, 255);
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .role-wrapper, .user-wrapper {
+    max-width: 98vw;
+    padding: 12px 2vw;
+  }
+  .role-table th, .role-table td, .user-table th, .user-table td {
+    padding: 7px 4px;
+    font-size: 13px;
+  }
+  .tambah-user-btn, .button-dua {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+@media (max-width: 600px) {
+  .ton-button, .login-card {
+    max-width: 95vw;
+    padding: 18px 8px;
+  }
+  .button-dua {
+    width: 98%;
+    font-size: 15px;
+  }
+}
+
+/* Dropdown Menu (untuk navbar) */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  color: white;
+  cursor: pointer;
+  padding: 8px 12px;
+  display: inline-block;
+}
+
+.dropdown-btn:hover {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 6px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 180px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: black;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown.show .dropdown-content {
+  display: block;
+}
