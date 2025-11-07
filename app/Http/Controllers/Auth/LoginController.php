@@ -58,9 +58,9 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
 
-            if ($user->idrole == 1) { // 1 = Admin
+            if ($user->idrole == 1) {
                 return redirect()->intended('/admin/jenis-hewan');
-            } elseif ($user->idrole == 2) { // 2 = Resepsionis
+            } elseif ($user->idrole == 2) {
                 return redirect()->intended('/resepsionis/home');
             }
 
