@@ -4,69 +4,87 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Contracts\View\View;
-use App\Http\Controllers\Auth\Request;
-use App\Http\Controllers\Auth\Auth;
-use Illuminate\Http\RedirectResponse;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use App\Models\Role;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
     protected $redirectTo = '/home';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-      public function showLoginForm()
+    public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function login(Request $request): RedirectResponse
+    public function login(Request $request)
     {
-        $request->validate([
+        // Validasi input
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|min:6',
         ]);
 
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            $user = Auth::user();
-
-            if ($user->idrole == 1) {
-                return redirect()->intended('/admin/jenis-hewan');
-            } elseif ($user->idrole == 2) {
-                return redirect()->intended('/resepsionis/home');
-            }
-
-            return redirect('/');
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
-        return back()->with('error', 'Email atau Password salah.');
+        // Ambil data user beserta role aktif
+        $user = User::with(['roleUser.role' => function ($query) {
+            $query->where('status', 1);
+        }])
+        ->where('email', $request->input('email'))
+        ->first();
+
+        if (!$user) {
+            return redirect()->back()
+                ->withErrors(['email' => 'Email tidak ditemukan.'])
+                ->withInput();
+        }
+
+        // Cek password
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()
+                ->withErrors(['password' => 'Password salah.'])
+                ->withInput();
+        }
+
+        // Ambil nama role
+        $idRole = $user->roleUser[0]->idrole ?? null;
+        $namaRole = Role::where('idrole', $idRole)->first();
+
+        // Login user ke sistem
+        Auth::login($user);
+
+        // Simpan session
+        $request->session()->put([
+            'user_id' => $user->iduser,
+            'user_name' => $user->nama,
+            'user_email' => $user->email,
+            'user_role' => $idRole ?? 'user',
+            'user_role_name' => $namaRole->nama_role ?? 'user',
+            'user_status' => $user->roleUser[0]->status ?? 'active',
+        ]);
+
+        // Arahkan sesuai role
+        switch ($idRole) {
+            case '1':
+                return redirect()->route('admin.dashboard')->with('success', 'Login berhasil!');
+            case '2':
+                return redirect()->route('dokter.dashboard')->with('success', 'Login berhasil!');
+            case '3':
+                return redirect()->route('perawat.dashboard')->with('success', 'Login berhasil!');
+            case '4':
+                return redirect()->route('resepsionis.dashboard')->with('success', 'Login berhasil!');
+            // default:
+            //     return redirect()->route('pemilik.dashboard')->with('success', 'Login berhasil!');
+        }
     }
 }

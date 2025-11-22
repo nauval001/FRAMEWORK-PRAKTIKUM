@@ -13,48 +13,22 @@ use App\Http\Controllers\Admin\PetController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
-// File: routes/web.php
 
-// ... (rute-rute lain seperti /login, /cek-koneksi, dll)
-
-// HAPUS rute lama ini:
-// Route::get('/admin/jenis-hewan', [JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
-// Route::get('/admin/pemilik', [PemilikController::class, 'index'])->name('admin.pemilik.index');
-
-// GANTI DENGAN INI:
 Route::resource('/admin/jenis-hewan', JenisHewanController::class)
      ->names('admin.jenis-hewan');
 
 Route::resource('/admin/pemilik', PemilikController::class)
      ->names('admin.pemilik');
-     
-// ... (rute-rute admin lainnya)
-
-// ... (rute-rute yang sudah ada)
 Route::get('/', [SiteController::class, 'index'])->name('site.home');
 Route::get('/cek-koneksi', [SiteController::class, 'cekKoneksi'])->name('site.cek-koneksi');
-// --- 2. TAMBAHKAN RUTE BARU DI BAWAH INI ---
-
-// Rute untuk MENAMPILKAN form login (GET)
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-
-// Rute untuk MEMPROSES data login (POST)
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-
-// Rute untuk Logout
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
 
-// Rute dari Modul
 Route::get('/cek-koneksi', [SiteController::class, 'cekKoneksi'])->name('site.cek-koneksi');
 Route::get('/', [SiteController::class, 'index'])->name('site.home');
-
-Route::get('/admin/jenis-hewan', [JenisHewanController
-::class, 'index'])->name('admin.jenis-hewan.index');Route::get('/admin/pemilik', [PemilikController::class, 'index'])->name('admin.pemilik.index');
+Route::get('/admin/jenis-hewan', [JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
+Route::get('/admin/pemilik', [PemilikController::class, 'index'])->name('admin.pemilik.index');
 
 //Daftar Ras Hewan
 Route::get('/admin/ras-hewan', [RasHewanController::class, 'index'])->name('admin.ras-hewan.index');
@@ -73,3 +47,6 @@ Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.in
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin/jenis-hewan', [App\Http\Controllers\Admin\JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
+Route::get('/admin/pemilik', [App\Http\Controllers\Admin\PemilikController::class, 'index'])->name('admin.pemilik.index');
+

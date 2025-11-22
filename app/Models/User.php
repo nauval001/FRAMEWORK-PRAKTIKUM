@@ -33,7 +33,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(Pemilik::class, 'iduser', 'iduser');
     }
-    public function role()
+    public function roleUser()
     {
         return $this->belongsTo(Role::class, 'idrole', 'idrole');
     }
