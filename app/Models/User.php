@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function pemilik()
+    {
+        return $this->hasOne(Pemilik::class, 'iduser', 'iduser');
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'idrole', 'idrole');
+    }
 }
